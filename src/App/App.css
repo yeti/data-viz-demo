@@ -1,0 +1,18 @@
+.App {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  padding: 20px;
+}
+
+.App__subsection {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+}
+
+h1, h2 {
+  font-family: monospace;
+}
