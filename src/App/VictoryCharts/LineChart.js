@@ -8,8 +8,8 @@ import {
 import styles from './victory.styles';
 import './LineChart.css';
 
-const ChildPoint = ({ x, y }) => <text x={x} y={y} fontSize={15}><span role="img" aria-label={`childpoint at (${x}, ${y})`}>🧒</span></text>;
-const AdultPoint = ({ x, y }) => <text x={x} y={y} fontSize={15}><span role="img" aria-label={`adultpoint at (${x}, ${y})`}>🤷</span></text>;
+const ChildPoint = ({ x, y }) => <text x={x} y={y} fontSize={15}>🧒</text>;
+const AdultPoint = ({ x, y }) => <text x={x} y={y} fontSize={15}>🤷</text>;
 
 export default ({ data, avgData, showChild, showAdult }) => {
   return (
@@ -40,10 +40,11 @@ export default ({ data, avgData, showChild, showAdult }) => {
           ) }
         <VictoryLabel
           text="value"
-          x={0}
-          y={175}
-          verticalTextAnchor="start"
-          labelPlacement="parallel"
+          transform="rotate(-90 0 0) translate(-160 10)"
+        />
+        <VictoryLabel
+          text="item number"
+          transform={() => 'translate(160 290)'}
         />
       </VictoryChart>
     </div>

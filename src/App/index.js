@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import LineChart from './VictoryCharts/LineChart';
 import SegmentChart from './VictoryCharts/SegmentChart';
-import LineChartVX from './VX/LineChartVX';
+import LineChartRecharts from './Recharts/LineChartRecharts';
 
 class App extends Component {
   constructor() {
@@ -52,6 +52,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Chart Implementations</h1>
+        <button onClick={() => {this.setState({ x: 0, data: []})}}>Reset Data</button>
         <h2>
           <a href="https://formidable.com/open-source/victory" target="_blank">
             Victory Charts
@@ -72,12 +73,17 @@ class App extends Component {
           />
         </section>
         <h2>
-          <a href="https://github.com/hshoff/vx" target="_blank">
-            VX
+          <a href="http://recharts.org/#/en-US/" target="_blank">
+            Recharts
           </a>
         </h2>
-        <section className="App__subsection App__vx">
-
+        <section className="App__subsection App__recharts">
+          <LineChartRecharts
+            data={this.state.data}
+            avgData={avgData}
+            showChild={this.state.showChild}
+            showAdult={this.state.showAdult}
+          />
         </section>
       </div>
     );
