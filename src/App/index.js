@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
+// Victory implementations
 import LineChart from './VictoryCharts/LineChart';
 import SegmentChart from './VictoryCharts/SegmentChart';
+import StackedBar from './VictoryCharts/StackedBar';
+
+// Recharts implementations
 import LineChartRecharts from './Recharts/LineChartRecharts';
+import PieChartRecharts from './Recharts/PieChartRecharts';
+
+// React-viz Implementations
+import LineChartViz from './react-vis/LineChartViz';
 
 class App extends Component {
   constructor() {
@@ -33,15 +41,22 @@ class App extends Component {
     }, 1000);
   }
 
+  resetScatter = () => {
+    this.setState({
+      showChild: false,
+      showAdult: false,
+    });
+  };
+
   toggleShowChild = () => {
     this.setState({
-      showChild: !this.state.showChild,
+      showChild: true,
     });
   };
 
   toggleShowAdult = () => {
     this.setState({
-      showAdult: !this.state.showAdult,
+      showAdult: true,
     });
   };
 
@@ -51,8 +66,10 @@ class App extends Component {
 
     return (
       <div className="App">
-        <h1>Chart Implementations</h1>
-        <button onClick={() => {this.setState({ x: 0, data: []})}}>Reset Data</button>
+        <h1>Charting Library Implementations with React</h1>
+        <div>
+          <button className="App__reset" onClick={() => {this.setState({ x: 0, data: []})}}>Reset Data</button>
+        </div>
         <h2>
           <a href="https://formidable.com/open-source/victory" target="_blank">
             Victory Charts
@@ -65,11 +82,16 @@ class App extends Component {
             showChild={this.state.showChild}
             showAdult={this.state.showAdult}
           />
+          <StackedBar
+            data={this.state.data}
+            avgData={avgData}
+          />
           <SegmentChart
             data={this.state.data}
             avgData={avgData}
             toggleShowChild={this.toggleShowChild}
             toggleShowAdult={this.toggleShowAdult}
+            reset={this.resetScatter}
           />
         </section>
         <h2>
@@ -83,6 +105,24 @@ class App extends Component {
             avgData={avgData}
             showChild={this.state.showChild}
             showAdult={this.state.showAdult}
+          />
+          <PieChartRecharts
+            data={this.state.data}
+            avgData={avgData}
+            toggleShowChild={this.toggleShowChild}
+            toggleShowAdult={this.toggleShowAdult}
+            reset={this.resetScatter}
+          />
+        </section>
+        <h2>
+          <a href="http://www.reactd3.org/" target="_blank">
+            React-D3
+          </a>
+        </h2>
+        <section className="App__subsection App__recharts">
+          <LineChartViz
+            data={this.state.data}
+            avgData={avgData}
           />
         </section>
       </div>

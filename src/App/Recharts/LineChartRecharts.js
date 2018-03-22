@@ -1,37 +1,26 @@
 import React from 'react';
 import './LineChartRecharts.css';
-import { LineChart, ScatterChart, CartesianGrid, XAxis, YAxis, Line, Scatter, Brush } from 'recharts';
+import { ResponsiveContainer, ComposedChart, CartesianGrid, XAxis, YAxis, Line, Scatter, Tooltip } from 'recharts';
 
 const ChildPoint = ({ x, y }) => <text x={x} y={y} fontSize={15}>🧒</text>;
 const AdultPoint = ({ x, y }) => <text x={x} y={y} fontSize={15}>🤷</text>;
 
-export default class LineChartRecharts extends React.Component {
-
-  render() {
-    return (
-      <div>
-      {(!this.props.showChild && !this.props.showAdult) && (
-      <LineChart width={700} height={400} data={this.props.data}>
+export default ({ data, avgData, showAdult, showChild }) => (
+  <div className="Recharts__LineChart">
+    <ResponsiveContainer width="100%" height="100%">
+      <ComposedChart data={data}>
         <CartesianGrid strokeDasharray="10, 1, 20, 1" />
-        <XAxis dataKey='x' />
-        <YAxis dataKey='y' />
-        <Line type="monotone" dataKey='y' stroke="rebeccapurple" />
-        <Line type="monotone" dataKey={() => this.props.avgData} stroke="pink" strokeDasharray="5, 5" />
-      </LineChart>)}
-      {(this.props.showChild || this.props.showAdult) && (
-        <ScatterChart width={700} height={400} data={this.props.data} margin="5 5">
-          <CartesianGrid strokeDasharray="10, 1, 20, 1" />
-          <XAxis dataKey='x' />
-          <YAxis dataKey='y' />
-          {this.props.showAdult && (
-            <Scatter data={this.props.data.filter(datum => !datum.child)} shape={<ChildPoint />} />
-          )}
-          {this.props.showChild && (
-            <Scatter data={this.props.data.filter(datum => datum.child)} shape={<AdultPoint />} />
-          )}
-          </ScatterChart>
-      )}
-      </div>
-    );
-  }
-}
+        <XAxis dataKey='x' name="x" />
+        <YAxis dataKey='y' domain={[0, 1]} />
+        <Line type='monotone' dataKey='y' stroke="orange" name="y" />
+        <Line dataKey={() => avgData} stroke="green" strokeDasharray="5, 5" name="Average Data" />
+        {showAdult && (
+          <Scatter data={data.filter(datum => !datum.child)} shape={<AdultPoint />} />
+        )}
+        {showChild && (
+          <Scatter data={data.filter(datum => datum.child)} shape={<ChildPoint />} />
+        )}
+      </ComposedChart>
+    </ResponsiveContainer>
+  </div>
+);

@@ -11,8 +11,17 @@
   justify-content: space-between;
   border-radius: 5px;
   border: 1px solid #aaa;
+  background-color: white;
 }
 
-h1, h2 {
-  font-family: monospace;
+.App__reset {
+  font-size: 20px;
+  line-height: 23px;
+  background-color: cornflowerblue;
+  color: white;
+  border: none;
+}
+
+body {
+  background-color: rgba(1,112,126, 0.2);
 }

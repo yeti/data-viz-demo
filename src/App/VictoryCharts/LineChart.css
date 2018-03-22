@@ -1,4 +1,15 @@
 .Victory__LineChart {
-  width: 50%;
-  height: 30vw;
+  width: 33%;
+  height: 17vw;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.Victory__DataChart {
+  height: 60%
+}
+
+.Victory__BrushChart {
+  height: 20%;
 }

@@ -54,11 +54,10 @@ export default (props) => {
                   {
                     target: 'data',
                     mutation: (targetProp) => {
-                      if (targetProp.slice.data.x === 'Child') {
-                        props.toggleShowChild();
-                      } else {
-                        props.toggleShowAdult();
-                      }
+                      props.reset();
+                      return {
+                        style: { ...targetProp.style, opacity: 1 },
+                      };
                     }
                   }
                 ];
