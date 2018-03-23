@@ -1,0 +1,221 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>React Graphing Library Low-down</title>
+	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.css" /> -->
+	<link rel="stylesheet" type="text/css" href="https://sindresorhus.com/github-markdown-css/github-markdown.css" />
+	<style> body { padding: 5rem 10rem; } </style>
+</head>
+<body>
+<article	class="markdown-body">
+<h1>React Graphing Library Research</h1>
+
+<a href="/index.html">Back to Graphs</a>
+
+<h2>Criterion</h2>
+
+<ul>
+<li><strong>A</strong>: Render visual data with multiple charts that are being updated live</li>
+<li><strong>B</strong>: Implement user interactions</li>
+<li><strong>C</strong>: Link user interactions in one chart to the UI of other charts</li>
+<li><strong>D</strong>: Edit styles/themes</li>
+<li><strong>E</strong>: Has testing coverage</li>
+</ul>
+
+<h2>Libraries</h2>
+
+<h3>Victory by Formidable Labs</h3>
+
+<p><a href="https://formidable.com/open-source/victory/docs">Link</a></p>
+
+<table>
+<colgroup>
+<col/>
+<col/>
+<col/>
+</colgroup>
+
+<thead>
+<tr>
+	<th>Crit</th>
+	<th>Score</th>
+	<th>Notes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td><strong>A</strong></td>
+	<td>4</td>
+	<td>Data props and accessors are well defined</td>
+</tr>
+<tr>
+	<td><strong>B</strong></td>
+	<td>2</td>
+	<td>Difficult, they have a custom event interface that is non-intuitive. Components are fed an <code>events</code> prop that is an array of non-serializable <code>event</code>-type objects. This <code>event</code>-type is poorly documented, but makes sense after some playing around with it.</td>
+</tr>
+<tr>
+	<td><strong>C</strong></td>
+	<td>3</td>
+	<td>Once <strong>B</strong> was figured out, it was easy to add hook to React/redux state. It may be more complicated however if the domain of the data is dynamic.</td>
+</tr>
+<tr>
+	<td><strong>D</strong></td>
+	<td>2</td>
+	<td>It's not super obvious what styles are available to you for each component. Also, I'm having a hard time getting labels to render correctly.</td>
+</tr>
+<tr>
+	<td><strong>E</strong></td>
+	<td>1</td>
+	<td>No tests</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Recharts</h3>
+
+<p><a href="http://recharts.org">Link</a></p>
+
+<table>
+<colgroup>
+<col/>
+<col/>
+<col/>
+</colgroup>
+
+<thead>
+<tr>
+	<th>Crit</th>
+	<th>Score</th>
+	<th>Notes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td><strong>A</strong></td>
+	<td>3</td>
+	<td>Going from nothing to something is pretty easy. Also the base styles have more going for them (automatically curved line graphs, easy to include cartesian grid, data accessors and props make sense). Interspersing scatter plots with line graphs is not very performant it seems (the points don't line up with the lines most of the time)</td>
+</tr>
+<tr>
+	<td><strong>B</strong></td>
+	<td>5</td>
+	<td>The context packaged with the event handler includes the data segment being moused over as well as other very helpful things. Works a lot like a regular event handler.</td>
+</tr>
+<tr>
+	<td><strong>C</strong></td>
+	<td>4</td>
+	<td>Pretty easy to set up and use</td>
+</tr>
+<tr>
+	<td><strong>D</strong></td>
+	<td>1</td>
+	<td>It's not easily configurable. Most styles are their own props on the components themselves</td>
+</tr>
+<tr>
+	<td><strong>E</strong></td>
+	<td>5</td>
+	<td>93% coverage</td>
+</tr>
+</tbody>
+</table>
+
+<h3>VX</h3>
+
+<p><a href="https://github.com/hshoff/vx">Link</a></p>
+
+<table>
+<colgroup>
+<col/>
+<col/>
+<col/>
+</colgroup>
+
+<thead>
+<tr>
+	<th>Crit</th>
+	<th>Score</th>
+	<th>Notes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td><strong>A</strong></td>
+	<td>2</td>
+	<td>Somewhat complicated. Since it's an unopinionated collection of components, it requires the user to put together the logic on their end to scale the graph appropriately/access the data correctly. In their words, this library is to help others build their own charting libraries.</td>
+</tr>
+<tr>
+	<td><strong>B</strong></td>
+	<td>1</td>
+	<td>Not supported out of the box AFAICT</td>
+</tr>
+<tr>
+	<td><strong>C</strong></td>
+	<td>1</td>
+	<td>See <strong>A</strong></td>
+</tr>
+<tr>
+	<td><strong>D</strong></td>
+	<td>5</td>
+	<td>Highest amount of customizability available. I would highly recommend this library if SI wants to have more advanced, very customized graphs.</td>
+</tr>
+<tr>
+	<td><strong>E</strong></td>
+	<td>2</td>
+	<td>Some tests (16% coverage)</td>
+</tr>
+</tbody>
+</table>
+
+<h3>React-vis</h3>
+
+<p><a href="https://github.com/uber/react-vis">Link</a></p>
+
+<table>
+<colgroup>
+<col/>
+<col/>
+<col/>
+</colgroup>
+
+<thead>
+<tr>
+	<th>Crit</th>
+	<th>Score</th>
+	<th>Notes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td><strong>A</strong></td>
+	<td>3</td>
+	<td>React-vis styling needs to be included or it won't render OOTB correctly. The index.html file either needs to point to the style file in node_modules or have a link to the CDN-served stylesheet. Additionally, responsive charts have no documentation but they require a prop-typed Plot component to be fed through 2 HOCs.</td>
+</tr>
+<tr>
+	<td><strong>B</strong></td>
+	<td>4</td>
+	<td>ValueBased and SeriesBased handlers are pretty sweet abstractions</td>
+</tr>
+<tr>
+	<td><strong>C</strong></td>
+	<td>5</td>
+	<td>Nothing extra needed to get this to work.</td>
+</tr>
+<tr>
+	<td><strong>D</strong></td>
+	<td>4</td>
+	<td>Pretty easily customizable (you can feed in className)</td>
+</tr>
+<tr>
+	<td><strong>E</strong></td>
+	<td>5</td>
+	<td>Really good coverage (93%) </td>
+</tr>
+</tbody>
+</table>
+</article>
+</body>
+</html>

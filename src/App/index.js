@@ -95,8 +95,9 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Charting Library Implementations with React</h1>
-        <div>
+        <div className="App__top-console">
           <button className="App__reset" onClick={() => {this.setState({ x: 0, data: []})}}>Reset Data</button>
+          <a href="/react-graphing-findings.html">Findings</a>
         </div>
         <h2>
           <a href="https://formidable.com/open-source/victory" target="_blank">

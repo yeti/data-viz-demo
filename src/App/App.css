@@ -34,6 +34,13 @@
   border: none;
 }
 
+.App__top-console {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  width: 20vw;
+}
+
 body {
   background-color: rgba(1,112,126, 0.2);
 }

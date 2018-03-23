@@ -9,7 +9,7 @@ export default ({ data, avgData, showAdult, showChild }) => (
   <div className="Recharts__LineChart">
     <ResponsiveContainer width="100%" height="100%">
       <ComposedChart data={data}>
-        <CartesianGrid strokeDasharray="10, 1, 20, 1" />
+        <CartesianGrid strokeDasharray="2, 1" />
         <XAxis dataKey='x' name="x">
           <Label>Time (s)</Label>
         </XAxis>
