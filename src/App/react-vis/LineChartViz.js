@@ -9,7 +9,7 @@ const Plot = ({ data, avgData, width, height, showChild, showAdult }) => (
   <XYPlot width={width} height={height} animation>
     <VerticalGridLines />
     <HorizontalGridLines />
-    <LineSeries data={data} color="orange" strokeWidth="2" />
+    <LineSeries data={data} color="orange" strokeWidth="2" curve="curveMonotoneX" />
     <LineSeries data={makeAvgData(data, avgData)} color="green" strokeWidth="2" strokeDasharray="5, 5" />
     {showChild && (
       <MarkSeries data={data.filter(datum => datum.child)} color="orange" />
