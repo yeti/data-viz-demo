@@ -11,6 +11,27 @@ import PieChartRecharts from './Recharts/PieChartRecharts';
 
 // React-viz Implementations
 import LineChartViz from './react-vis/LineChartViz';
+import PieChartViz from './react-vis/PieChartViz';
+
+const DateFinders = ({ setFrom, setTo, fromVal, toVal }) => (<div className="App__range-inputs">
+    <h4>Data Range Finders</h4>
+    <div style={{display: 'flex', flexDirection: 'column'}}>
+      <input
+        type="number"
+        name="from value"
+        placeholder="data points from:"
+        onChange={setFrom}
+        value={fromVal}
+      />
+      <input
+        type="number"
+        name="to value"
+        placeholder="up to:"
+        onChange={setTo}
+        value={toVal}
+      />
+    </div>
+</div>);
 
 class App extends Component {
   constructor() {
@@ -20,8 +41,15 @@ class App extends Component {
       data: [],
       showChild: false,
       showAdult: false,
+      from: null,
+      to: null,
     };
   }
+
+  getDataInRange = () => {
+    const { data, from, to } = this.state;
+    return (from && to && data.slice(from, to)) || data;
+  };
 
   componentDidMount() {
     setInterval(() => {
@@ -101,10 +129,16 @@ class App extends Component {
         </h2>
         <section className="App__subsection App__recharts">
           <LineChartRecharts
-            data={this.state.data}
-            avgData={avgData}
+            data={this.getDataInRange()}
+            avgData={this.getDataInRange().reduce((acc, val) => acc + val.y, 0) / this.getDataInRange().length}
             showChild={this.state.showChild}
             showAdult={this.state.showAdult}
+          />
+          <DateFinders
+            setFrom={(ev) => this.setState({from: ev.target.value})}
+            setTo={(ev) => this.setState({to: ev.target.value})}
+            fromVal={this.state.from}
+            toVal={this.state.to}
           />
           <PieChartRecharts
             data={this.state.data}
@@ -115,14 +149,29 @@ class App extends Component {
           />
         </section>
         <h2>
-          <a href="http://www.reactd3.org/" target="_blank">
-            React-D3
+          <a href="https://uber.github.io/react-vis/" target="_blank">
+            React-Vis
           </a>
         </h2>
-        <section className="App__subsection App__recharts">
+        <section className="App__subsection App_reactvis">
           <LineChartViz
+            data={this.getDataInRange()}
+            avgData={this.getDataInRange().reduce((acc, val) => acc + val.y, 0) / this.getDataInRange().length}
+            showChild={this.state.showChild}
+            showAdult={this.state.showAdult}
+          />
+          <DateFinders
+            setFrom={(ev) => this.setState({from: ev.target.value})}
+            setTo={(ev) => this.setState({to: ev.target.value})}
+            fromVal={this.state.from}
+            toVal={this.state.to}
+          />
+          <PieChartViz
             data={this.state.data}
             avgData={avgData}
+            toggleShowChild={this.toggleShowChild}
+            toggleShowAdult={this.toggleShowAdult}
+            reset={this.resetScatter}
           />
         </section>
       </div>

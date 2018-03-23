@@ -14,6 +14,18 @@
   background-color: white;
 }
 
+.App__range-inputs {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.App__range-inputs input {
+  margin-bottom: 2rem;
+}
+
 .App__reset {
   font-size: 20px;
   line-height: 23px;
